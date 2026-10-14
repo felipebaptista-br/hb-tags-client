@@ -58,14 +58,14 @@ export function Faq() {
     <Section id="perguntas" labelledBy="perguntas-titulo">
       <Kicker>Dúvidas</Kicker>
       <SectionTitle id="perguntas-titulo">Perguntas frequentes</SectionTitle>
-      <Accordion className="mt-10 border-t border-cyan-400/20">
+      <Accordion className="mt-10 border-t border-stone-200">
         {questions.map((item) => (
-          <AccordionItem key={item.value} value={item.value} className="border-cyan-400/20">
-            <AccordionTrigger className="text-base text-zinc-100 hover:text-cyan-100 hover:no-underline **:data-[slot=accordion-trigger-icon]:text-cyan-200">
+          <AccordionItem key={item.value} value={item.value} className="border-stone-200">
+            <AccordionTrigger className="text-base text-stone-900 hover:no-underline">
               {item.question}
             </AccordionTrigger>
             <AccordionContent>
-              <p className="leading-7 text-zinc-300">{item.answer}</p>
+              <p className="leading-7 text-stone-600">{item.answer}</p>
             </AccordionContent>
           </AccordionItem>
         ))}

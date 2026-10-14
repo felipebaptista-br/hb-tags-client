@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "cn"
 
 export const buyButtonClass =
-  "h-12 w-full bg-cyan-300 px-8 text-base font-semibold normal-case tracking-normal text-slate-950 shadow-[0_0_32px_rgba(62,240,255,0.45)] hover:bg-cyan-200 sm:w-auto"
+  "h-12 w-full rounded-full bg-[#1f4d45] px-8 text-base font-semibold normal-case tracking-normal text-white hover:bg-[#173c36] sm:w-auto"
 
 export function BuyLink({ className }: { className?: string }) {
   return (

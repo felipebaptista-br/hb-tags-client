@@ -39,18 +39,14 @@ export const revealItemClass =
   "animate-landing-rise motion-reduce:animate-none [animation-timeline:view()] [animation-range:entry_0%_cover_28%]"
 
 export function Kicker({ children }: { children: ReactNode }) {
-  return (
-    <p className="font-[family-name:var(--font-geist-sans)] text-xs font-medium tracking-[0.22em] text-cyan-300 uppercase">
-      {children}
-    </p>
-  )
+  return <p className="text-sm font-medium text-[#1f4d45]">{children}</p>
 }
 
 export function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
     <h2
       id={id}
-      className="font-[family-name:var(--font-geist-sans)] text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl"
+      className="mt-2 text-balance text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl"
     >
       {children}
     </h2>
