@@ -1,5 +1,6 @@
 "use client"
 import React from "react"
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 import {
   InputOTP,
   InputOTPGroup,
@@ -61,7 +62,11 @@ export default function ActivateSecurityCodeModal(): React.JSX.Element {
                 id="security-code"
                 maxLength={6}
                 value={securityCode}
-                onChange={(e) => setSecurityCode(e)}
+                onChange={(value) => setSecurityCode(value.toUpperCase())}
+                pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+                inputMode="text"
+                autoCapitalize="characters"
+                autoComplete="one-time-code"
               >
                 <InputOTPGroup>
                   <InputOTPSlot index={0} />
