@@ -1,11 +1,8 @@
 "use client"
+
 import React from "react"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp"
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,53 +13,61 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Field, FieldLabel } from "../ui/field"
+import { Field, FieldLabel } from "@/components/ui/field"
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp"
 import { toast } from "@/components/ui/toast"
 
-export default function ActivateSecurityCodeModal(): React.JSX.Element {
-  const [showModal, setShowModal] = React.useState<boolean>(true)
-  const [securityCode, setSecurityCode] = React.useState<string>("")
-  // => Código estático de segurança temporário
-  const code: string = "FXRYEI"
+type Props = {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  value: string
+  onChange: (value: string) => void
+  onConfirmed: () => void
+}
 
-  React.useEffect(() => {
-    setShowModal(true)
-  }, [])
-
+export default function ActivateSecurityCodeModal({
+  open,
+  onOpenChange,
+  value,
+  onChange,
+  onConfirmed,
+}: Props): React.JSX.Element {
   const handleConfirm = () => {
-    if (securityCode === code) {
-      setShowModal(false)
-    } else {
+    if (value.length !== 8) {
       toast.add({
         type: "error",
-        description: "Código de segurança inválido",
+        description: "O código de acesso tem 8 caracteres.",
         priority: "high",
       })
-      setSecurityCode("")
+      return
     }
+    onConfirmed()
   }
 
   return (
-    <AlertDialog open={showModal} onOpenChange={setShowModal}>
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogTrigger />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Para realizar ativação, você precisa inserir o código de segurança
+            Para ativar, informe o código de acesso da pulseira
           </AlertDialogTitle>
           <AlertDialogDescription className="space-y-5">
             <p>
-              O código de segurança pode ser encontrado no seu email de ativação.
+              O código de 8 caracteres veio com a pulseira (impresso ou no lote do
+              fornecedor). Não é a senha da sua conta.
             </p>
             <Field className="w-fit">
-              <FieldLabel htmlFor="security-code">
-                Digite o código de segurança
-              </FieldLabel>
+              <FieldLabel htmlFor="security-code">Código de acesso</FieldLabel>
               <InputOTP
                 id="security-code"
-                maxLength={6}
-                value={securityCode}
-                onChange={(value) => setSecurityCode(value.toUpperCase())}
+                maxLength={8}
+                value={value}
+                onChange={(next) => onChange(next.toUpperCase())}
                 pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
                 inputMode="text"
                 autoCapitalize="characters"
@@ -75,17 +80,15 @@ export default function ActivateSecurityCodeModal(): React.JSX.Element {
                   <InputOTPSlot index={3} />
                   <InputOTPSlot index={4} />
                   <InputOTPSlot index={5} />
+                  <InputOTPSlot index={6} />
+                  <InputOTPSlot index={7} />
                 </InputOTPGroup>
               </InputOTP>
             </Field>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction
-            onClick={handleConfirm}
-          >
-            Confirmar
-          </AlertDialogAction>
+          <AlertDialogAction onClick={handleConfirm}>Confirmar</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

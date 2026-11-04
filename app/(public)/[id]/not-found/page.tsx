@@ -1,4 +1,6 @@
 import React, { Suspense } from "react"
+
+import { StatusScreen } from "@/components/public/status-screen"
 import Loading from "./loading"
 
 interface NotFoundParams {
@@ -17,10 +19,11 @@ export default function NotFound({ params }: NotFoundParams): React.JSX.Element 
 
 async function NotFoundContent({ params }: NotFoundParams): Promise<React.JSX.Element> {
   const { id } = await params
-
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
-      <p className="text-2xl font-bold">ID: {id}</p>
-    </div>
+    <StatusScreen
+      title="Pulseira não encontrada"
+      description="Não localizamos esta identificação. Confira o QR ou o link."
+      detail={`Referência: ${id}`}
+    />
   )
 }

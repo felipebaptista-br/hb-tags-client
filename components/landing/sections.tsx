@@ -31,7 +31,12 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <BuyLink className="h-10 w-auto shrink-0 px-4 text-sm" />
+        <div className="flex shrink-0 items-center gap-2">
+          <a href="/entrar" className="py-1 text-sm text-stone-600 hover:text-[#1f4d45]">
+            Entrar
+          </a>
+          <BuyLink className="h-10 w-auto shrink-0 px-4 text-sm" />
+        </div>
       </div>
     </header>
   )
